@@ -1,7 +1,7 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Build and deploy WAR app to Azure Web App - Orchid-BE
+name: Build and deploy JAR app to Azure Web App - Orchid-BE
 
 on:
   push:
@@ -28,7 +28,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: java-app
-          path: '${{ github.workspace }}/target/*.war'
+          path: '${{ github.workspace }}/target/*.jar'
 
   deploy:
     runs-on: ubuntu-latest
@@ -38,7 +38,7 @@ jobs:
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
     permissions:
       id-token: write #This is required for requesting the JWT
-
+  
     steps:
       - name: Download artifact from build job
         uses: actions/download-artifact@v3
@@ -48,9 +48,9 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v1
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_790743A428A0423F94986C41C54A6932 }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_05A5B180A6944D4AAA6495D579D59CCC }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_4A80136D5FAE4F33A33786B59F1668E1 }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_9A509D14C2AB4D6AB045F77A919304AB }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_9B90A319F3A94B4A89D3CD14807B76E1 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_E33681B33F27473F8E25665CAABDD3E1 }}
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
@@ -58,5 +58,5 @@ jobs:
         with:
           app-name: 'Orchid-BE'
           slot-name: 'Production'
-          package: '*.war'
+          package: '*.jar'
           
