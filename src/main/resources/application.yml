@@ -4,9 +4,9 @@ server:
 
 spring:
   datasource:
-    url: ${SPRING_DATASOURCE_URL:jdbc:mysql://pvinh.cbefdztepdps.ap-southeast-1.rds.amazonaws.com:3306/db_orchid?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=True}
-    username: ${SPRING_DATASOURCE_USERNAME:root}
-    password: ${SPRING_DATASOURCE_PASSWORD:root2002}
+    url: ${SPRING_DATASOURCE_URL:jdbc:mysql://pvinh.mysql.database.azure.com:3306/db_orchid?serverTimezone=UTC&allowPublicKeyRetrieval=True}
+    username: ${SPRING_DATASOURCE_USERNAME:phuocvinh}
+    password: ${SPRING_DATASOURCE_PASSWORD:root@1234}
 
 
 #  datasource:
@@ -33,10 +33,10 @@ spring:
     encoding: UTF-8
     default-locale: en
   mail:
-    host: smtp.gmail.com
-    username: anhlhse161941@fpt.edu.vn
+    host: live.smtp.mailtrap.io
+    username: api
     #spring.mail.password=your-email-password
-    password: iran xwwi rhwo cjcn
+    password: c10163364e93e30294bbb118d8a831aa
     port: 587
     properties:
       mail:
