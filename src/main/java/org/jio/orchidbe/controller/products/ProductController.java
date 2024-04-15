@@ -38,6 +38,7 @@ public class ProductController {
 
 
     @PostMapping("/count")
+    @Operation(security = { @SecurityRequirement(name = "bearer-key") })
     public Long countProductsByCategoryTypeAndActived(@RequestBody(required = false) ProductDTOResquest request) {
         if (request == null || (request.getType() == null && !request.isActived())) {
             // Nếu request body là null hoặc không có trường nào được cung cấp, đếm tất cả sản phẩm có trạng thái hoạt động là true
@@ -63,6 +64,7 @@ public class ProductController {
     }
 
     @PostMapping("")
+
     @Operation(security = { @SecurityRequirement(name = "bearer-key") })
     public ResponseEntity<?> createProduct(
             @Valid @RequestBody ProductDTOCreateRequest productDTORequest,

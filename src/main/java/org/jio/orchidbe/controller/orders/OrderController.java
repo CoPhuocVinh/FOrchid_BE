@@ -53,6 +53,7 @@ public class OrderController {
 //        return new ResponseEntity<>(apiResponse, HttpStatus.OK);
 //    }
     @GetMapping("list")
+    @Operation(security = { @SecurityRequirement(name = "bearer-key") })
     public ResponseEntity<?> getOrder(@ModelAttribute GetAllOrderRequest getAllOrderRequest){
         ApiResponse apiResponse = new ApiResponse();
 
@@ -72,6 +73,7 @@ public class OrderController {
     }
 
     @PutMapping("update-order/{id}")
+    @Operation(security = { @SecurityRequirement(name = "bearer-key") })
     public ResponseEntity updateOrder(@PathVariable("id") Long id,
                                         @RequestBody UpdateOrderRequest updateOrderRequest,
                                         BindingResult bindingResult) throws ChangeSetPersister.NotFoundException, BadRequestException, DataNotFoundException {
@@ -99,6 +101,7 @@ public class OrderController {
     }
 
     @PostMapping("update-status")
+    @Operation(security = { @SecurityRequirement(name = "bearer-key") })
     public ResponseEntity<?> updateStatusOrder(
             @Valid @RequestBody StatusOrderRequest statusOrderRequest,
             BindingResult result
@@ -133,6 +136,7 @@ public class OrderController {
 //    }
 
     @PostMapping("/count")
+    @Operation(security = { @SecurityRequirement(name = "bearer-key") })
     public Long countOrdersByStatus(@RequestBody(required = false) OrderStatusDTORequest orderStatusDTORequest) {
         if (orderStatusDTORequest == null || orderStatusDTORequest.getStatus() == null) {
             // Trường hợp không có trạng thái được cung cấp, đếm toàn bộ phiên đấu giá

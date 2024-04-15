@@ -49,9 +49,13 @@ public class WebSecurityConfig {
                     requests
                             .requestMatchers(
                                     String.format("%s/users/register", apiPrefix),
-                                    String.format("%s/auth/login", apiPrefix),
+                                    String.format("%s/auth/**", apiPrefix),
                                     //healthcheck
                                     String.format("%s/healthcheck/**", apiPrefix),
+
+                                    // pay
+                                    String.format("%s/payments/**", apiPrefix),
+
                                     String.format("%s/actuator/**", apiPrefix),
                                     //swagger
                                     //"/v3/api-docs",
@@ -66,6 +70,7 @@ public class WebSecurityConfig {
                                     "/swagger-ui.html",
                                     "/webjars/swagger-ui/**",
                                     "/swagger-ui/index.html"
+
 
                             )
                             .permitAll()

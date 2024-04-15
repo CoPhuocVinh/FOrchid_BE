@@ -82,7 +82,8 @@ management:
 
 
 #url return payment
+#https://orchid.fams.io.vn/api/v1
 HOST:
-  URL: ${HOST_URL:https://orchid.fams.io.vn/api/v1}
+  URL: ${HOST_URL:https://orchid-be.azurewebsites.net/api/v1}
 
 

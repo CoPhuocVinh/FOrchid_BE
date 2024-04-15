@@ -1,5 +1,7 @@
 package org.jio.orchidbe.controller.feedbacks;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.jio.orchidbe.dtos.api_response.ApiResponse;
@@ -25,6 +27,7 @@ public class ReplyController {
     private final ValidatorUtil validatorUtil;
 
     @PostMapping("create")
+    @Operation(security = { @SecurityRequirement(name = "bearer-key") })
     public ResponseEntity<?> createReply(
             @Valid @RequestBody CreateReplyRequest createReplyRequest,
             BindingResult result
@@ -60,6 +63,7 @@ public class ReplyController {
     }
 
     @DeleteMapping("/delete-reply/{id}") // Sử dụng @DeleteMapping thay vì @PostMapping
+    @Operation(security = { @SecurityRequirement(name = "bearer-key") })
     public ResponseEntity<?> deleteReply(
             @PathVariable("id") Long id
     ) throws DataNotFoundException {

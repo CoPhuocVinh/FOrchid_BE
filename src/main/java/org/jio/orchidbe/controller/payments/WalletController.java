@@ -7,6 +7,8 @@ package org.jio.orchidbe.controller.payments;/*  Welcome to Jio word
     Jio: I wish you always happy with coding <3
 */
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.jio.orchidbe.dtos.wallets.WalletDTORequest;
@@ -29,6 +31,7 @@ public class WalletController {
     private final ValidatorUtil validatorUtil;
     private final IWallerService wallerService;
     @PostMapping("/recharge-wallet-by-userId/{id}")
+    @Operation(security = { @SecurityRequirement(name = "bearer-key") })
     public ResponseEntity<?> rechargeWallet(
             @PathVariable Long id,
             @Valid @RequestBody WalletDTORequest dto,
@@ -48,6 +51,7 @@ public class WalletController {
 
     //get balance
     @GetMapping("/get-balance-by-userId/{id}")
+    @Operation(security = { @SecurityRequirement(name = "bearer-key") })
     public ResponseEntity<?> getBalanceByUserId(@PathVariable Long id) throws DataNotFoundException {
         ApiResponse apiResponse = new ApiResponse();
         WalletDTOResponse response = wallerService.getBalanceByUserId(id);

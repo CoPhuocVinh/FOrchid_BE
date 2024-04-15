@@ -1,5 +1,7 @@
 package org.jio.orchidbe.controller.feedbacks;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.apache.coyote.BadRequestException;
@@ -26,6 +28,7 @@ public class FeedbackController {
     private final ValidatorUtil validatorUtil;
 
     @PostMapping("create")
+    @Operation(security = { @SecurityRequirement(name = "bearer-key") })
     public ResponseEntity<?> createFeedback(
             @Valid @RequestBody CreateFeedbackRequest createFeedbackRequest,
             BindingResult result
@@ -43,6 +46,7 @@ public class FeedbackController {
     }
 
     @GetMapping("list")
+    @Operation(security = { @SecurityRequirement(name = "bearer-key") })
     public ResponseEntity<?> getFeedbacks(@ModelAttribute GetAllFeedbackRequest getAllFeedbackRequest){
         ApiResponse apiResponse = new ApiResponse();
 
@@ -52,6 +56,7 @@ public class FeedbackController {
     }
 
     @PutMapping("update-feedback/{id}")
+    @Operation(security = { @SecurityRequirement(name = "bearer-key") })
     public ResponseEntity updateReply(@PathVariable("id") Long id,
                                       @RequestBody UpdateFeedbackRequest updateFeedbackRequest,
                                       BindingResult bindingResult) throws ChangeSetPersister.NotFoundException{
@@ -61,6 +66,7 @@ public class FeedbackController {
     }
 
     @DeleteMapping("/delete-feedback/{id}")
+    @Operation(security = { @SecurityRequirement(name = "bearer-key") })
     public ResponseEntity<?> deleteFeedback(
             @PathVariable("id") Long id
     ) throws DataNotFoundException {

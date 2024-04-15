@@ -1,6 +1,8 @@
 package org.jio.orchidbe.controller.notifications;
 
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import org.apache.coyote.BadRequestException;
 import org.jio.orchidbe.dtos.api_response.ApiResponse;
@@ -30,6 +32,7 @@ public class NotificationController {
 
 
     @GetMapping("list")
+    @Operation(security = { @SecurityRequirement(name = "bearer-key") })
     public ResponseEntity<?> getFeedbacks(@ModelAttribute GetAllNotificationRequest getAllNotificationRequest){
         ApiResponse apiResponse = new ApiResponse();
 
@@ -39,6 +42,7 @@ public class NotificationController {
     }
 
     @PutMapping("update/{id}")
+    @Operation(security = { @SecurityRequirement(name = "bearer-key") })
     public ResponseEntity updateReply(@PathVariable("id") Long id,
                                       @RequestBody UpdateNotificationRequest updateNotificationRequest,
                                       BindingResult bindingResult) throws ChangeSetPersister.NotFoundException, DataNotFoundException, BadRequestException {

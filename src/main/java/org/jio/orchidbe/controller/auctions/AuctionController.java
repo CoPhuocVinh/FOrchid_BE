@@ -41,6 +41,7 @@ public class AuctionController {
     private final IFirebaseService firebaseService;
 
     @PostMapping("/count")
+    @Operation(security = { @SecurityRequirement(name = "bearer-key") })
     public Long countAuctionsByStatus(@RequestBody(required = false) StatusDTOResquest auctionStatusDTO) {
         if (auctionStatusDTO == null || auctionStatusDTO.getStatus() == null) {
             // Trường hợp không có trạng thái được cung cấp, đếm toàn bộ phiên đấu giá
@@ -88,7 +89,6 @@ public class AuctionController {
 
     @GetMapping("list")
     @Operation(security = { @SecurityRequirement(name = "bearer-key") })
-
     public ResponseEntity<?> getAuction(@ModelAttribute GetAllAuctionResquest getAllAuctionResquest){
         ApiResponse apiResponse = new ApiResponse();
 
@@ -173,6 +173,7 @@ public class AuctionController {
 
     // register
     @PostMapping("/register-by-auctionId/{id}")
+    @Operation(security = { @SecurityRequirement(name = "bearer-key") })
     public ResponseEntity<?> registerAuctionById(@PathVariable Long id,
         @Valid @RequestBody RegisterAuctionDTO dto) throws DataNotFoundException, BadRequestException {
         ApiResponse apiResponse = new ApiResponse();

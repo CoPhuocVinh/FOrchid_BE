@@ -7,6 +7,8 @@ package org.jio.orchidbe.controller.payments;/*  Welcome to Jio word
     Jio: I wish you always happy with coding <3
 */
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -31,6 +33,7 @@ public class PaymentController {
     private final IPaymentService paymentService;
 
     @GetMapping("/create_payment")
+    @Operation(security = { @SecurityRequirement(name = "bearer-key") })
     public String payment(HttpSession session, HttpServletResponse response
             , @RequestParam int id, Model model) throws UnsupportedEncodingException {
 
