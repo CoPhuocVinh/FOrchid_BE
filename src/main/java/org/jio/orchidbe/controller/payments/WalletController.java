@@ -60,4 +60,23 @@ public class WalletController {
     }
 
 
+    @PostMapping("/recharge-wallet-by-userId-v2/{id}")
+    @Operation(security = { @SecurityRequirement(name = "bearer-key") })
+    public ResponseEntity<?> rechargeWalletV2(
+            @PathVariable Long id,
+            @Valid @RequestBody WalletDTORequest dto,
+            BindingResult result
+    ) throws DataNotFoundException, UnsupportedEncodingException {
+        ApiResponse apiResponse = new ApiResponse();
+        if (result.hasErrors()) {
+            apiResponse.error(validatorUtil.handleValidationErrors(result.getFieldErrors()));
+            return ResponseEntity.badRequest().body(apiResponse);
+        }
+
+        String vnpayURL = wallerService.rechargeWallet(id,dto,result);
+        apiResponse.ok( vnpayURL);
+        return new ResponseEntity<>(apiResponse, HttpStatus.OK);
+
+    }
+
 }

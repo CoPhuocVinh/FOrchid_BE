@@ -102,6 +102,8 @@ public class GetAllAuctionResquest extends BaseFilterRequest<Auction> {
                 predicates.add(cb.like(cb.lower(root.get(Auction.Fields.productCode).get("productCode")), codeTrim));
             }
 
+            predicates.add(cb.equal(root.get(BaseEntity.Fields.deleted), false));
+
             return cb.and(predicates.toArray(new Predicate[0]));
         };
     }

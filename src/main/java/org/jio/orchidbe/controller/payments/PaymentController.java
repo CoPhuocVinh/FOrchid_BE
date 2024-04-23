@@ -142,7 +142,6 @@ public class PaymentController {
         //Optional<Discount> discountEntity = discountService.findById(registerDTO.getADiscountID());
 
 
-
     }
 
 
